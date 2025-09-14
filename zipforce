@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+import argparse
+from zipfile import ZipFile
+
+def main():
+    print(f'Beginning bruteforce.')
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file', help='Zip file to be brute-forced')
+    parser.add_argument('wordlist', help='Wordlist to be used in the bruteforce attempt')
+
