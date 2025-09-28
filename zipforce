@@ -1,12 +1,27 @@
 #!/usr/bin/env python3
 import argparse
-from zipfile import ZipFile
+import zipfile
 
-def main():
-    print(f'Beginning bruteforce.')
+def main(targetzip, wordlist):
+    if zipfile.is_zipfile(targetzip):
+        with zipfile.ZipFile(args.targetzip) as target:
+            print(f'Beginning bruteforce...\r\nTargeting {targetzip} with wordlist at {wordlist}')
+            with open (args.wordlist) as wordls:
+                for password in wordls:
+                    try:
+                        print(f'Trying with password {password}', end='')
+                        target.read(target, pwd=password)
+                    except:
+                        continue
+    else:
+        target.close()
+        print(f'{targetzip} is not recognized as a zip folder. Please provide a valid zip folder.')
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('file', help='Zip file to be brute-forced')
+    parser.add_argument('targetzip', help='Zip file to be brute-forced')
     parser.add_argument('wordlist', help='Wordlist to be used in the bruteforce attempt')
+    args = parser.parse_args()
+    main(args.targetzip, args.wordlist)
 
